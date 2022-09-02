@@ -1,0 +1,17 @@
+version: "3.1"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=next
+      - POSTGRES_PASSWORD=next
+    ports:
+      - '5432:5432'
+    
+  app:
+    build: .
+    command: yarn start:dev
+    ports:
+      - "3000:3000"
+    network_mode: "host"
