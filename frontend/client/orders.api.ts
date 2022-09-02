@@ -2,6 +2,7 @@ import axios from 'axios'
 import { settings } from '../settings/api.settings'
 
 export interface Order {
+    id?: string,
     protocol: string,
     presentant: string,
     type: string,
@@ -21,18 +22,27 @@ export const OrdersClient = () => {
         return orders
     }
 
+    const getOrderById = async (id: string) => {
+        const { data: response } = await client.get(`/${id}`)
+        console.log(response)
+        const { content: order } = response
+        return order
+    }
+
     const createOrder = async (payload: Order) => {
-        const { data: order } = await client.post('', payload)
+        const { data: response } = await client.post('/', payload)
+        const { content: order } = response
         return order
     }
 
     const updateOrder = async (payload: UpdateOrderDto) => {
-        const { data: order } = await client.post('', payload)
+        const { data: order } = await client.post('/', payload)
         return order
     }
 
     return {
         getOrders,
+        getOrderById,
         createOrder,
         updateOrder
     }

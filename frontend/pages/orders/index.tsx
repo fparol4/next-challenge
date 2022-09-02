@@ -35,6 +35,12 @@ const TitleButton = styled.button`
     cursor: pointer; 
 `
 
+export const Title = {
+    TitleContainer,
+    TitlePageName,
+    TitlePageDescription
+}
+
 
 const OrderAvatar = styled.div`
     width: 60px; 
@@ -90,13 +96,13 @@ const OrdersContainer = styled.div`
 
 const Tooltip = styled.div`
     position: absolute; 
-    left: -40%; 
+    left: -50%; 
     background: white;
     width: 200px; 
-    height: 80px; 
-    visibility: hidden; 
+    height: 60px; 
     display: flex; 
     flex-direction: column; 
+    visibility: hidden;
    
 
     .title {
@@ -167,7 +173,6 @@ export default () => {
             <OrdersContainer>
                 <div className="orders-list">
                     {orders.map((order, index) => (
-
                         <OrderItem key={index}>
                             <Tooltip>
                                 <div className='title'>Informações Adicionais</div>
@@ -184,11 +189,14 @@ export default () => {
                                 <span className='order-entry_date'>{order.entry_date}</span>
                                 <span className='order-due_date'>{order.due_date}</span>
                             </OrderData>
-                            <EditIcon style={{
-                                width: '30px',
-                                height: '30px',
-                                color: theme.colors.green
-                            }}>Edit!</EditIcon>
+                            <a href={`/orders/create/${order.id}`}>
+                                <EditIcon style={{
+                                    width: '30px',
+                                    height: '30px',
+                                    color: theme.colors.green,
+                                    cursor: 'pointer'
+                                }}>Edit!</EditIcon>
+                            </a>
                         </OrderItem>
                     ))}
                 </div>
